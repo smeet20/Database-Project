@@ -12,28 +12,20 @@ public class DatabaseManager {
         connectionProperties.put("password", getPassword());
         m_connection = null;
         try {
-            m_connection = DriverManager.getConnection("jdbc:mysql://localhost/", connectionProperties);
+            m_connection = DriverManager.getConnection("jdbc:mysql://localhost/twitter", connectionProperties);
         } catch (SQLException e) {
             e.printStackTrace();
-            AppManager.instance().quit();
+            AppManager.quit();
         }
     }
 
     private String getUserName() {
-        String user = System.getenv("DBUSER");
-        if (user == null) {
-            return "";
-        }
-
+        String user = "root";
         return user;
     }
 
     private String getPassword() {
-        String password = System.getenv("DBPASSWORD");
-        if (password == null) {
-            return "";
-        }
-
+        String password = "1234";
         return password;
     }
 }
