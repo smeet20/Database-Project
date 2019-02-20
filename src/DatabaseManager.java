@@ -31,7 +31,7 @@ public class DatabaseManager {
         PreparedStatement statement = m_connection.prepareStatement("" +
                 "CREATE TABLE IF NOT EXISTS tweets" +
                 "(" +
-                "id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY," +
+                "id BIG INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY," +
                 "parent_id INTEGER UNSIGNED," +
                 "time TIMESTAMP NOT NULL," +
                 "likes INTEGER UNSIGNED DEFAULT 0," +
@@ -56,7 +56,7 @@ public class DatabaseManager {
         PreparedStatement statement = m_connection.prepareStatement("" +
                 "CREATE TABLE IF NOT EXISTS users" +
                 "(" +
-                "id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY," +
+                "id BIG INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY," +
                 "username NVARCHAR(15) NOT NULL," +
                 "followers INTEGER UNSIGNED DEFAULT 0," +
                 "following INTEGER UNSIGNED DEFAULT 0" +
