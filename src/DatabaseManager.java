@@ -31,8 +31,8 @@ public class DatabaseManager {
         PreparedStatement statement = m_connection.prepareStatement("" +
                 "CREATE TABLE IF NOT EXISTS tweets" +
                 "(" +
-                "id BIG INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY," +
-                "parent_id INTEGER UNSIGNED," +
+                "id BIGINT PRIMARY KEY," +
+                "parent_id BIGINT," +
                 "time TIMESTAMP NOT NULL," +
                 "likes INTEGER UNSIGNED DEFAULT 0," +
                 "retweets INTEGER UNSIGNED DEFAULT 0," +
@@ -54,9 +54,9 @@ public class DatabaseManager {
 
     private void createUserTable() throws SQLException {
         PreparedStatement statement = m_connection.prepareStatement("" +
-                "CREATE TABLE IF NOT EXISTS users" +
+                "CREATE TABLE IF NOT EXISTS author" +
                 "(" +
-                "id BIG INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY," +
+                "id BIGINT PRIMARY KEY," +
                 "username NVARCHAR(15) NOT NULL," +
                 "followers INTEGER UNSIGNED DEFAULT 0," +
                 "following INTEGER UNSIGNED DEFAULT 0" +
@@ -67,10 +67,10 @@ public class DatabaseManager {
 
     private void createUserTweetRelationTable() throws SQLException {
         PreparedStatement statement = m_connection.prepareStatement("" +
-                "CREATE TABLE IF NOT EXISTS user_tweet" +
+                "CREATE TABLE IF NOT EXISTS author_tweet" +
                 "(" +
-                "user_id INTEGER UNSIGNED NOT NULL," +
-                "tweet_id INTEGER UNSIGNED NOT NULL" +
+                "author_id BIGINT NOT NULL," +
+                "tweet_id BIGINT NOT NULL" +
                 ")");
 
         statement.execute();
