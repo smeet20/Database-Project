@@ -20,11 +20,13 @@ public class DatabaseManager {
 
     private void createTables() throws SQLException {
         createTwitterTable();
-        createUserTable();
-        createUserTweetRelationTable();
+        createAuthorTable();
+        createAuthorTweetRelationTable();
         createHashTagTable();
         createEventTable();
         createEventHashtagRelationTable();
+        createUsersTable();
+        createUserQueryTable();
     }
 
     private void createTwitterTable() throws SQLException {
@@ -52,7 +54,7 @@ public class DatabaseManager {
         statement.execute();
     }
 
-    private void createUserTable() throws SQLException {
+    private void createAuthorTable() throws SQLException {
         PreparedStatement statement = m_connection.prepareStatement("" +
                 "CREATE TABLE IF NOT EXISTS author" +
                 "(" +
@@ -65,7 +67,7 @@ public class DatabaseManager {
         statement.execute();
     }
 
-    private void createUserTweetRelationTable() throws SQLException {
+    private void createAuthorTweetRelationTable() throws SQLException {
         PreparedStatement statement = m_connection.prepareStatement("" +
                 "CREATE TABLE IF NOT EXISTS author_tweet" +
                 "(" +
@@ -95,6 +97,29 @@ public class DatabaseManager {
                 "hashtag_id INTEGER UNSIGNED NOT NULL" +
                 ")");
 
+        statement.execute();
+    }
+
+    private void createUsersTable() throws SQLException {
+        PreparedStatement statement = m_connection.prepareStatement("" +
+                "CREATE TABLE IF NOT EXISTS users" +
+                "(" +
+                "id INTEGER UNSIGNED PRIMARY KEY," +
+                "name NVARCHAR(40)," +
+                "email VARCHAR(320)," +
+                "password NVARCHAR(20)" +
+                ")");
+        statement.execute();
+    }
+
+    private void createUserQueryTable() throws SQLException {
+        PreparedStatement statement = m_connection.prepareStatement("" +
+                "CREATE TABLE IF NOT EXISTS user_query" +
+                "(" +
+                "user_id INTEGER UNSIGNED NOT NULL," +
+                "query NVARCHAR(140) NOT NULL," +
+                "PRIMARY KEY (user_id, query)" +
+                ")");
         statement.execute();
     }
 
