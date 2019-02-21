@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05e4316e-39b0-4e5d-b09c-acfcc73929d8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Author.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tweet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2277129c-8a50-4e8a-92fc-8c57c8ed2cb6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/2277129c-8a50-4e8a-92fc-8c57c8ed2cb6.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TwitterEvent/DatabaseManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterEvent/DatabaseManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TwitterEvent/Scrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TwitterEvent/Scrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DatabaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Scrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Scrapper.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,11 +45,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DatabaseManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="121" column="28" lean-forward="true" selection-start-line="121" selection-start-column="28" selection-end-line="121" selection-end-column="28" />
+            <state relative-caret-position="267">
+              <caret line="145" selection-start-line="145" selection-end-line="145" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -54,8 +60,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Scrapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="43" column="33" lean-forward="true" selection-start-line="43" selection-start-column="33" selection-end-line="43" selection-end-column="33" />
+            <state relative-caret-position="371">
+              <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#160#161#0" expanded="true" />
@@ -66,10 +72,51 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Author.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="e#199#200#0" expanded="true" />
+                <element signature="e#226#227#0" expanded="true" />
+                <element signature="e#258#259#0" expanded="true" />
+                <element signature="e#281#282#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Tweet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="206">
+              <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#808#809#0" expanded="true" />
+                <element signature="e#836#837#0" expanded="true" />
+                <element signature="e#1022#1023#0" expanded="true" />
+                <element signature="e#1055#1056#0" expanded="true" />
+                <element signature="e#942#943#0" expanded="true" />
+                <element signature="e#975#976#0" expanded="true" />
+                <element signature="e#872#873#0" expanded="true" />
+                <element signature="e#901#902#0" expanded="true" />
+                <element signature="e#931#932#0" expanded="true" />
+                <element signature="e#959#960#0" expanded="true" />
+                <element signature="e#993#994#0" expanded="true" />
+                <element signature="e#1025#1026#0" expanded="true" />
+                <element signature="e#1058#1059#0" expanded="true" />
+                <element signature="e#1090#1091#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/2277129c-8a50-4e8a-92fc-8c57c8ed2cb6/console.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="13" selection-start-column="13" selection-end-column="13" />
+              <caret column="21" lean-forward="true" selection-start-column="21" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -77,11 +124,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AppManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="161">
+              <caret line="27" column="45" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="45" />
               <folding>
-                <element signature="e#442#443#0" expanded="true" />
-                <element signature="e#479#480#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#293#294#0" expanded="true" />
+                <element signature="e#333#334#0" expanded="true" />
+                <element signature="e#435#436#0" expanded="true" />
+                <element signature="e#468#469#0" expanded="true" />
+                <element signature="e#366#367#0" expanded="true" />
+                <element signature="e#396#397#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -109,10 +161,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.sql" />
-        <option value="$PROJECT_DIR$/src/AppManager.java" />
+        <option value="$PROJECT_DIR$/src/Author.java" />
+        <option value="$PROJECT_DIR$/src/Tweet.java" />
         <option value="$PROJECT_DIR$/src/Scrapper.java" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/2277129c-8a50-4e8a-92fc-8c57c8ed2cb6/console.sql" />
         <option value="$PROJECT_DIR$/src/DatabaseManager.java" />
+        <option value="$PROJECT_DIR$/src/AppManager.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/2277129c-8a50-4e8a-92fc-8c57c8ed2cb6/console.sql" />
       </list>
     </option>
   </component>
@@ -156,7 +210,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550676894916" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550687310313" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="MySQL" />
     <property name="database.console.LAST_STATE" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -214,7 +268,7 @@
       <workItem from="1549217434500" duration="2746000" />
       <workItem from="1549269196816" duration="748000" />
       <workItem from="1550604500314" duration="6358000" />
-      <workItem from="1550665733479" duration="6826000" />
+      <workItem from="1550665733479" duration="15076000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1548794199764</created>
@@ -230,33 +284,39 @@
       <option name="project" value="LOCAL" />
       <updated>1550609277616</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added user and user_query tables">
+      <created>1550676914114</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1550676914114</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24288000" />
+    <option name="totallyTimeSpent" value="32538000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="0" width="1374" height="732" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Capture Tool" order="0" />
       <window_info id="UI Designer" order="1" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.49816176" visible="true" weight="0.18740515" />
-      <window_info id="Structure" order="6" sideWeight="0.5018382" side_tool="true" weight="0.25302014" />
+      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.49579832" visible="true" weight="0.18740515" />
+      <window_info id="Structure" order="6" sideWeight="0.5042017" side_tool="true" weight="0.18740515" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.3277311" />
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Messages" order="4" weight="0.3286119" />
       <window_info anchor="bottom" id="Version Control" order="5" />
-      <window_info anchor="bottom" id="Database Console" order="6" weight="0.39159665" />
+      <window_info active="true" anchor="bottom" id="Database Console" order="6" visible="true" weight="0.4067227" />
       <window_info anchor="bottom" id="Message" order="7" />
       <window_info anchor="bottom" id="Find" order="8" />
-      <window_info anchor="bottom" id="Run" order="9" weight="0.35462186" />
+      <window_info anchor="bottom" id="Run" order="9" weight="0.40336135" />
       <window_info anchor="bottom" id="Debug" order="10" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="11" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="12" weight="0.4" />
@@ -278,33 +338,53 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="create tables" />
-    <option name="LAST_COMMIT_MESSAGE" value="create tables" />
+    <MESSAGE value="added user and user_query tables" />
+    <option name="LAST_COMMIT_MESSAGE" value="added user and user_query tables" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.sql" />
     <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar!/com/mysql/jdbc/ConnectionImpl.class" />
-    <entry file="file://$PROJECT_DIR$/src/AppManager.java">
+    <entry file="file://$PROJECT_DIR$/src/Tweet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="206">
+          <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
           <folding>
-            <element signature="e#442#443#0" expanded="true" />
-            <element signature="e#479#480#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#808#809#0" expanded="true" />
+            <element signature="e#836#837#0" expanded="true" />
+            <element signature="e#1022#1023#0" expanded="true" />
+            <element signature="e#1055#1056#0" expanded="true" />
+            <element signature="e#942#943#0" expanded="true" />
+            <element signature="e#975#976#0" expanded="true" />
+            <element signature="e#872#873#0" expanded="true" />
+            <element signature="e#901#902#0" expanded="true" />
+            <element signature="e#931#932#0" expanded="true" />
+            <element signature="e#959#960#0" expanded="true" />
+            <element signature="e#993#994#0" expanded="true" />
+            <element signature="e#1025#1026#0" expanded="true" />
+            <element signature="e#1058#1059#0" expanded="true" />
+            <element signature="e#1090#1091#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/2277129c-8a50-4e8a-92fc-8c57c8ed2cb6/console.sql">
+    <entry file="file://$PROJECT_DIR$/src/Author.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        <state relative-caret-position="22">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="e#199#200#0" expanded="true" />
+            <element signature="e#226#227#0" expanded="true" />
+            <element signature="e#258#259#0" expanded="true" />
+            <element signature="e#281#282#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Scrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" column="33" lean-forward="true" selection-start-line="43" selection-start-column="33" selection-end-line="43" selection-end-column="33" />
+        <state relative-caret-position="371">
+          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#160#161#0" expanded="true" />
@@ -315,11 +395,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DatabaseManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="121" column="28" lean-forward="true" selection-start-line="121" selection-start-column="28" selection-end-line="121" selection-end-column="28" />
+        <state relative-caret-position="267">
+          <caret line="145" selection-start-line="145" selection-end-line="145" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="27" column="45" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#293#294#0" expanded="true" />
+            <element signature="e#333#334#0" expanded="true" />
+            <element signature="e#435#436#0" expanded="true" />
+            <element signature="e#468#469#0" expanded="true" />
+            <element signature="e#366#367#0" expanded="true" />
+            <element signature="e#396#397#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/2277129c-8a50-4e8a-92fc-8c57c8ed2cb6/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="21" lean-forward="true" selection-start-column="21" selection-end-column="21" />
         </state>
       </provider>
     </entry>

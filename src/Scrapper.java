@@ -4,6 +4,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
 
 public class Scrapper {
@@ -11,15 +12,16 @@ public class Scrapper {
         return "https://twitter.com/search?q=" + query;
     }
 
-    private void scrape(String query) throws IOException {
+    public void scrap(String query) throws IOException, SQLException {
         String url = getUrlFromQuery(query);
         Document doc = Jsoup.connect(url).get();
         Elements tweets = doc.select("li[data-item-type='tweet']");
-        for (Element tweet : tweets) {
-            Element metaData = tweet.selectFirst("div");
+        for (Element rawTweet : tweets) {
+            Element metaData = rawTweet.selectFirst("div");
             String userId = metaData.attr("data-user-id");
             String userName = metaData.attr("data-name");
-            String tweetId = metaData.attr("tweet-id");
+            String tweetId = metaData.attr("data-tweet-id");
+            String parentId = metaData.attr("data-conversation-id");
 
             long timeStamp = Long.parseLong(metaData.selectFirst("._timestamp").attr("data-time-ms"));
 
@@ -35,18 +37,15 @@ public class Scrapper {
             Element retweetData = metaData.selectFirst(".ProfileTweet-action--reply > .ProfileTweet-actionCount");
             int retweets = Integer.parseInt(retweetData.attr("data-tweet-stat-count"));
 
-            System.out.println(userName);
-            System.out.println(new Date(timeStamp).toString());
-            System.out.println(tweetText);
-            System.out.println(likes);
-            System.out.println(replies);
-            System.out.println(retweets);
-            System.out.println();
-        }
-    }
+            Author author = new Author(userId, userName);
+            Tweet tweet = new Tweet(tweetId, parentId, timeStamp, tweetText, likes, replies, retweets);
 
-    public static void main(String[] args) throws IOException {
-        Scrapper scrapper = new Scrapper();
-        scrapper.scrape("india");
+            System.out.println(tweet.text().length() + " " + tweet.text());
+            try {
+                AppManager.databaseManager().insertTweet(tweet);
+            } catch (Exception ignored) {
+
+            }
+        }
     }
 }

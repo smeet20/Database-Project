@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.List;
 import java.util.Properties;
 
 public class DatabaseManager {
@@ -37,6 +38,7 @@ public class DatabaseManager {
                 "parent_id BIGINT," +
                 "time TIMESTAMP NOT NULL," +
                 "likes INTEGER UNSIGNED DEFAULT 0," +
+                "replies INTEGER UNSIGNED DEFAULT 0," +
                 "retweets INTEGER UNSIGNED DEFAULT 0," +
                 "text NVARCHAR(140) NOT NULL" +
                 ")");
@@ -59,7 +61,7 @@ public class DatabaseManager {
                 "CREATE TABLE IF NOT EXISTS author" +
                 "(" +
                 "id BIGINT PRIMARY KEY," +
-                "username NVARCHAR(15) NOT NULL," +
+                "name NVARCHAR(15) NOT NULL," +
                 "followers INTEGER UNSIGNED DEFAULT 0," +
                 "following INTEGER UNSIGNED DEFAULT 0" +
                 ")");
@@ -72,7 +74,8 @@ public class DatabaseManager {
                 "CREATE TABLE IF NOT EXISTS author_tweet" +
                 "(" +
                 "author_id BIGINT NOT NULL," +
-                "tweet_id BIGINT NOT NULL" +
+                "tweet_id BIGINT NOT NULL," +
+                "PRIMARY KEY (author_id, tweet_id)" +
                 ")");
 
         statement.execute();
@@ -94,7 +97,8 @@ public class DatabaseManager {
                 "CREATE TABLE IF NOT EXISTS event_hashtag" +
                 "(" +
                 "event_id INTEGER UNSIGNED NOT NULL," +
-                "hashtag_id INTEGER UNSIGNED NOT NULL" +
+                "hashtag_id INTEGER UNSIGNED NOT NULL," +
+                "PRIMARY KEY (event_id, hashtag_id)" +
                 ")");
 
         statement.execute();
@@ -107,7 +111,8 @@ public class DatabaseManager {
                 "id INTEGER UNSIGNED PRIMARY KEY," +
                 "name NVARCHAR(40)," +
                 "email VARCHAR(320)," +
-                "password NVARCHAR(20)" +
+                "password VARCHAR(64)," +
+                "salt VARCHAR(8)" +
                 ")");
         statement.execute();
     }
@@ -121,6 +126,22 @@ public class DatabaseManager {
                 "PRIMARY KEY (user_id, query)" +
                 ")");
         statement.execute();
+    }
+
+    public boolean insertTweet(Tweet tweet) throws SQLException {
+        PreparedStatement statement = m_connection.prepareStatement("" +
+                "INSERT INTO tweets" +
+                "(id, parent_id, time, likes, replies, retweets, text)" +
+                "VALUES" +
+                "(?, ?, ?, ?, ?, ?, ?)");
+        statement.setString(1, tweet.tweetId());
+        statement.setString(2, tweet.parentId());
+        statement.setTimestamp(3, new Timestamp(tweet.timestamp()));
+        statement.setInt(4, tweet.likes());
+        statement.setInt(5, tweet.replies());
+        statement.setInt(6, tweet.retweets());
+        statement.setString(7, tweet.text());
+        return statement.execute();
     }
 
     private String getUserName() {
