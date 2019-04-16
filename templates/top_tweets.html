@@ -1,0 +1,40 @@
+<div id="top-tweets-container" class="container ml-auto mr-auto mt-4" style="text-align: center;">
+</div>
+
+<script>
+
+function updateTopTweets(tweets) {
+    const elm = document.getElementById('top-tweets-container');
+    let inner = '';
+    console.log(tweets)
+    tweets.tweets.forEach(t => {
+        let tmpl = `
+            <div class="card mt-2" style="width: 18rem; display: inline-block; text-align: center;">
+                <div class="card-body">
+                    <h5 class="card-title">${t.title}</h5>
+                </div>
+            </div>
+        `;
+        inner += tmpl;
+    });
+    
+    elm.innerHTML = inner;
+}
+
+function fetchTopTweets() {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const tweets = JSON.parse(xhr.responseText);
+            updateTopTweets(tweets);
+        }
+    }
+    
+    xhr.open('POST', '/api/top-tweets', true);
+    xhr.send();
+}
+
+
+setInterval(fetchTopTweets, 2000);
+
+</script>
