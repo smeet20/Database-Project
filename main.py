@@ -42,7 +42,7 @@ def index():
 @app.route('/api/top-tweets', methods=['POST'])
 def top_tweets():
     tweets = []
-    res = query_db('select * from tweets')
+    res = query_db('select * from tweets LIMIT 5')
     for tweet in res:
         tweets.append({'text': tweet['text']})
     data = {'tweets': tweets}

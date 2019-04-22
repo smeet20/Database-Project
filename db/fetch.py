@@ -49,10 +49,10 @@ def scrape(query):
 def collect_data():
     global Conn
     Conn = sqlite3.connect('db/database.db')
-    while True:
+    while False:
         for query in Queries:
             scrape(query)
-            time.sleep(10000000)
+            time.sleep(120)
         
 if __name__ == '__main__':
     scrape('hello')
