@@ -1,4 +1,35 @@
-<div id="top-tweets-container" class="container ml-auto mr-auto mt-4" style="text-align: center;">
+<style>
+.TweetTextSize {
+    font-size: 14px;
+}
+.Emoji--forText {
+    width: 16px;
+    height: 16px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.TwitterCard {
+    padding: 0px !important;
+    width: 200px;
+    display: inline-block;
+    text-align: left;
+    margin: 5px;
+    border: 1px solid #e0e0e0;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.TwitterImage {
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+}
+
+</style>
+
+<div id="top-tweets-container" class="container ml-auto mr-auto mt-4">
 </div>
 
 <script>
@@ -9,10 +40,8 @@ function updateTopTweets(tweets) {
     console.log(tweets)
     tweets.tweets.forEach(t => {
         let tmpl = `
-            <div class="card mt-2" style="width: 18rem; display: inline-block; text-align: center;">
-                <div class="card-body">
-                    <h5 class="card-title">${t.title}</h5>
-                </div>
+            <div class="TwitterCard">
+                ${t.text}
             </div>
         `;
         inner += tmpl;
@@ -35,6 +64,7 @@ function fetchTopTweets() {
 }
 
 
-setInterval(fetchTopTweets, 2000);
+setInterval(fetchTopTweets, 3000);
+fetchTopTweets()
 
 </script>

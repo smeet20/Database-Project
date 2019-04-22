@@ -1,0 +1,55 @@
+CREATE TABLE IF NOT EXISTS tweets
+(
+    id BIGINT PRIMARY KEY,
+    parent_id BIGINT,
+    time TIMESTAMP NOT NULL,
+    likes INTEGER UNSIGNED DEFAULT 0,
+    replies INTEGER UNSIGNED DEFAULT 0,
+    retweets INTEGER UNSIGNED DEFAULT 0,
+    text NVARCHAR(280) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS hashtags
+(
+    id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    text NVARCHAR(280) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS author
+(
+    id BIGINT PRIMARY KEY,
+    name NVARCHAR(15) NOT NULL,
+    followers INTEGER UNSIGNED DEFAULT 0,
+    following INTEGER UNSIGNED DEFAULT 0,
+    country NVARCHAR(80)
+);
+
+CREATE TABLE IF NOT EXISTS author_tweet
+(
+    author_id BIGINT NOT NULL,
+    tweet_id BIGINT NOT NULL,
+    PRIMARY KEY (author_id, tweet_id)
+);
+
+CREATE TABLE IF NOT EXISTS event_hashtag
+(
+    event_id INTEGER UNSIGNED NOT NULL,
+    hashtag_id INTEGER UNSIGNED NOT NULL,
+    PRIMARY KEY (event_id, hashtag_id)
+);
+
+CREATE TABLE IF NOT EXISTS users 
+( 
+    id INTEGER UNSIGNED PRIMARY KEY, 
+    name NVARCHAR(40), 
+    email VARCHAR(320), 
+    password VARCHAR(64), 
+    salt VARCHAR(8) 
+);
+
+CREATE TABLE IF NOT EXISTS user_query 
+(
+    user_id INTEGER UNSIGNED NOT NULL, 
+    query NVARCHAR(280) NOT NULL, 
+    PRIMARY KEY (user_id, query) 
+);
