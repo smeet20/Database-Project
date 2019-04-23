@@ -1,0 +1,74 @@
+ <style>
+.TweetTextSize {
+    font-size: 14px;
+}
+.Emoji--forText {
+    width: 16px;
+    height: 16px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.TwitterCard {
+    width: 500px;
+    min-width: 350px;
+    display: block;
+    text-align: left;
+    margin: 5px;
+}
+
+.TwitterImage {
+    background-size: cover;
+    width: 100%;
+    height: 350px;
+}
+
+.u-hidden, .twitter-timeline-link {
+    display: none;
+}
+
+</style>
+
+<div id="recent-tweets-container" class="container ml-auto mr-auto mt-4">
+</div>
+
+<script>
+
+function updateRecentTweets(tweets) {
+    const elm = document.getElementById('recent-tweets-container');
+    let inner = '<h1>Recent Tweets</h1>';
+    tweets.tweets.forEach(t => {
+        let tmpl = `
+            <div class="card TwitterCard">
+                <div class="card-body">
+                    <div class="card-text">
+                        ${t.text.replace(/\s\s+/g, ' ')}
+                    </div>
+                </div>
+            </div>
+        `;
+        inner += tmpl;
+    });
+    
+    elm.innerHTML = inner;
+}
+
+function fetchRecentTweets() {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const tweets = JSON.parse(xhr.responseText);
+            updateRecentTweets(tweets);
+        }
+    }
+    
+    xhr.open('POST', '/api/recent-tweets', true);
+    xhr.send();
+}
+
+
+setInterval(fetchRecentTweets, 3000);
+fetchRecentTweets()
+
+</script>

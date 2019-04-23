@@ -1,12 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light shadow">
     <a class="navbar-brand" href="#">{{ title }}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0 ml-auto">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="button">Advance Options</button>
+        <form class="form-inline my-2 my-lg-0 ml-auto" action="/">
+            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#adv_modal">Advance Options</button>
         </form>
         <ul class="navbar-nav">
             <button class="btn btn-outline-primary my-2 my-sm-0 ml-2" data-toggle="modal" data-target="#auth_modal">
@@ -20,10 +20,26 @@
     </div>
 </nav>
 
+<div class="modal fade" id="adv_modal" tabindex="-1" role="dialog" aria-labelledby="advModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="search-input" placeholder="Advance Search">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="auth_modal" tabindex="-1" role="dialog" aria-labelledby="authModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
+            {% if not loggedIn %}
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="login-tab" data-toggle="tab" role="tab" aria-controls="login" aria-selected="true" href="#login">Login</a>
@@ -34,42 +50,46 @@
                 </ul>
                 <div class="tab-content my-3">
                     <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                        <form>
+                        <form action="/login" method="POST">
                             <div class="form-group">
                                 <label for="login-input-email">Email address</label>
-                                <input type="email" class="form-control" id="login-input-email" placeholder="your-email@somedomain.com">
+                                <input type="email" class="form-control" id="login-input-email" name="email" placeholder="your-email@somedomain.com" required>
                             </div>
                             <div class="form-group">
                                 <label for="login-input-password">Password</label>
-                                <input type="password" class="form-control" id="login-input-password" placeholder="Password">
+                                <input type="password" class="form-control" id="login-input-password" name="password" placeholder="Password" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Login</button>
                         </form>
                     </div>
                     <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
-                        <form>
+                        <form action="/signup" method="POST">
                             <div class="form-group">
                                 <label for="signup-input-name">Full Name</label>
-                                <input type="text" class="form-control" id="signup-input-name" placeholder="your-name">
+                                <input type="text" class="form-control" name="name" id="signup-input-name" placeholder="your-name" required>
                             </div>
                             <div class="form-group">
                                 <label for="signup-input-email">Email address</label>
-                                <input type="email" class="form-control" id="signup-input-email" placeholder="your-email@somedomain.com">
+                                <input type="email" class="form-control" name="email" id="signup-input-email" placeholder="your-email@somedomain.com" required>
                             </div>
                             <div class="form-group">
                                 <label for="signup-input-password">Password</label>
-                                <input type="password" class="form-control" id="signup-input-password" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <label for="signup-input-confirm-password">Confirm Password</label>
-                                <input type="password" class="form-control" id="signup-input-confirm-password" placeholder="Confirm Password">
+                                <input type="password" class="form-control" name="password" id="signup-input-password" placeholder="Password" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Signup</button>
                         </form>
                     </div>
                 </div>
+            {% else %}
+                Profile...
+                <form action="/logout" method="POST">
+                    <button type="submit" class="btn btn-primary">Logout</button>
+                </form>
+            {% endif %}
             </div>
         </div>
     </div>
 </div>
 
+<div style='height: 70px;'>
+</div>
