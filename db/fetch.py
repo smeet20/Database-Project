@@ -16,7 +16,10 @@ def scrape(query):
     req = requests.get(url, headers={'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.128 Safari/537.36'})
     html_doc = req.text
     soup = BeautifulSoup(html_doc, 'html.parser')
-        
+    
+    # adding the event, we would not call scrape else.
+    cur = Conn.cursor()
+    cur.execute('insert into events (text) values (?)', (query,))
     for tweet in soup.select('li[data-item-type="tweet"]'):
         meta_data = tweet.div
         user_id = meta_data['data-user-id']
@@ -48,12 +51,14 @@ def scrape(query):
             
 def collect_data():
     global Conn
-    Conn = sqlite3.connect('db/database.db')
+    Conn = sqlite3.connect('./database.db')
     while False:
         for query in Queries:
             scrape(query)
             time.sleep(120)
         
 if __name__ == '__main__':
+    collect_data()
     scrape('hello')
-    
+    scrape('Holi')
+    scrape('Mia Bro')
