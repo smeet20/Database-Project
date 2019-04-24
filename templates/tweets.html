@@ -28,6 +28,10 @@
     display: none;
 }
 
+strong {
+    font-weight: normal;
+}
+
 </style>
 
 <div id="tweets-container" class="container ml-auto mr-auto mt-4">
@@ -42,8 +46,21 @@ function updateTweets(tweets) {
         let tmpl = `
             <div class="card TwitterCard">
                 <div class="card-body">
-                    <div class="card-text">
+                    <div class="card-text" id="t-${t.id}">
                         ${t.text.replace(/\s\s+/g, ' ')}
+                    </div>
+                    <div class="card-footer">
+                        <div>
+                            <i class="fa fa-heart" style='color: red'></i> ${t.likes} &nbsp; &nbsp;
+                            <i class="fa fa-retweet" style='color: green'></i> ${t.retweets} &nbsp; &nbsp;
+                            <i class="fa fa-reply" style='color: blue'></i> ${t.replies}
+                            <span class='float-right'>${moment(t.time).fromNow()}</span>
+                        </div>
+                        <div id="d-${t.id}">
+                            <button class="btn btn-link" id="b-${t.id}" onclick="sentimentData('${t.id}')">
+                                Sentiment Data
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,7 +88,32 @@ function fetchTweets(how) {
     
     let query = getQueryString('search')
     if (query) {
-        xhr.open('GET', `/api/search?q=${query}&cnt=${cnt}`, true);
+        let advOpt = document.querySelector('input[name = "adv-search"]:checked')
+        if (advOpt) {
+            advOpt = advOpt.value
+        } else {
+            advOpt = 0
+        }
+        
+        let ord = document.querySelector('input[name = "search-ord"]:checked')
+        if (ord) {
+            ord = ord.value
+        } else {
+            ord = 2
+        }
+        
+        let lk = document.getElementById('range-likes')
+        if (lk) lk = lk.value
+        let rt = document.getElementById('range-retweets')
+        if (rt) rt = rt.value
+        let rp = document.getElementById('range-replies')
+        if (rp) rp = rp.value
+        
+        if (!lk) lk = 0
+        if (!rt) rt = 0
+        if (!rp) rp = 0
+        
+        xhr.open('GET', `/api/search?q=${query}&cnt=${cnt}&adv=${advOpt}&ord=${ord}&lk=${lk}&rt=${rt}&rp=${rp}`, true);
     } else {
         xhr.open('POST', `/api/${how}-tweets`, true);
     }
@@ -92,5 +134,21 @@ let cnt = 10
 
 setInterval(() => fetchTweets(kind), 3000);
 fetchTweets(kind)
+
+
+
+function sentimentData(tid) {
+    text = document.getElementById(`t-${tid}`).textContent
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const s = JSON.parse(xhr.responseText)
+            alert(`${text}\n\nSentiment: ${s.c}\nPositive: ${s.p}\nNegative: ${s.n}`)
+        }
+    }
+    xhr.open('GET', `/api/sentiment?text=${text}`, true)
+    xhr.send()
+}
+
 
 </script>
