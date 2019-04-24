@@ -32,7 +32,7 @@ def scrape(query):
             html_doc_user = req_user.text
             soup_user = BeautifulSoup(html_doc_user, 'html.parser')
             tt = soup_user.select('div[class="ProfileHeaderCard-location"]')
-            location = strip(tt[0].a.string.split(',')[-1])
+            location = tt[0].a.string.split(',')[-1].strip()
         except:
             pass # let go.
         user_name = meta_data['data-name']
