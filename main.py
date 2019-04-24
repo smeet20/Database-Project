@@ -11,6 +11,8 @@ from passlib.hash import sha256_crypt
 
 import sqlite3
 
+from textblob import TextBlob
+from textblob.sentiments import NaiveBayesAnalyzer
 
 app = Flask(__name__)
 app.secret_key = 'I love rach**'
@@ -93,6 +95,19 @@ def index():
     return render_template('index.html', loggedIn=loggedIn, email=email)
 
 
+@app.route('/api/sentiment')
+def sentiment():
+    text = request.args.get('text')
+    if not text:
+        return jsonify({})
+    blob = TextBlob(text, analyzer=NaiveBayesAnalyzer())
+    sentiment = blob.sentiment
+    c = '😊'
+    if sentiment.classification == 'neg':
+        c = '🤬'
+    return jsonify({'c': c, 'p': sentiment.p_pos, 'n': sentiment.p_neg})
+
+
 @app.route('/api/search')
 def search():
     q = request.args['q']
@@ -111,17 +126,29 @@ def search():
     else:
         ordr = 'desc'
     title = 'Tweets like "{}"'.format(q)
-    query = "select * from tweets where text like '%{}%' order by time {} limit {}".format(q, ordr, cnt)
+    
+    lk = request.args.get('lk')
+    rt = request.args.get('rt')
+    rp = request.args.get('rp')
+    lk = (int(lk) / 100) if lk else 0
+    rp = (int(rp) / 100) if lk else 0
+    rt = (int(rt) / 100) if lk else 0
+    prm = '{}*likes + {}*retweets + {}*replies'.format(lk, rt, rp)
+    if lk + rp + rt == 0:
+        prm = 'time'
+    
+    query = "select * from tweets where text like '%{}%' order by {} {} limit {}".format(q, prm, ordr, cnt)
     if adv == 2:
-        query = "select tweets.* from tweets natural join tweet_hashtag natural join hashtags natural join event_hashtag natural join events where name like '%{}%' order by time {} limit {}".format(q, ordr, cnt)
+        query = "select tweets.* from tweets natural join tweet_hashtag natural join hashtags natural join event_hashtag natural join events where name like '%{}%' order by {} {} limit {}".format(q, prm, ordr, cnt)
         title = 'Tweets from events like "{}"'.format(q)
     elif adv == 3:
-        query = "select tweets.* from tweets natural join author where name like '%{}%' order by time {} limit {}".format(q, ordr, cnt)
+        query = "select tweets.* from tweets natural join author where name like '%{}%' order by {} {} limit {}".format(q, prm, ordr, cnt)
         title = 'Tweets from author like "{}"'.format(q)
     res = query_db(query)
     tweets = tweets_res_helper(res)
     data = {'tweets': tweets, 'type': title}
     return jsonify(data)
+
 
 @app.route('/api/recent-tweets', methods=['POST'])
 def recent_tweets():
@@ -138,10 +165,13 @@ def top_tweets():
     data = {'tweets': tweets, 'type': 'Top Tweets'}
     return jsonify(data)
 
+
 def tweets_res_helper(res):
     tweets = []
+    tid = 0
     for tweet in res:
-        tweets.append({'text': tweet['text'], 'likes': tweet['likes'], 'retweets': tweet['retweets'], 'replies': tweet['replies'], 'time': tweet['time']})
+        tweets.append({'id': 'twt-{}'.format(tid), 'text': tweet['text'], 'likes': tweet['likes'], 'retweets': tweet['retweets'], 'replies': tweet['replies'], 'time': tweet['time']})
+        tid += 1
     return tweets
     
 
