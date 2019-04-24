@@ -4,8 +4,8 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0 ml-auto" action="/">
-            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0 ml-auto" action="">
+            <input id="srch-input" class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-primary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#adv_modal">Advance Options</button>
         </form>
         <ul class="navbar-nav">
@@ -24,11 +24,53 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="search-input" placeholder="Advance Search">
+                <form action='#'>
+                    <p>Options</p>
+                    <div class="form-check">
+                        <label class="form-check-label" for="searchByMatching">
+                            <input class="form-check-input" type="radio" name="adv-search" id="searchByMatching" value="1" checked onclick="localStorage.setItem('adv-search', '1')">
+                            Search matching tweets
+                        </label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    
+                    <div class="form-check">
+                        <label class="form-check-label" for="searchByEvent">
+                            <input class="form-check-input" type="radio" name="adv-search" id="searchByEvent" value="2" onclick="localStorage.setItem('adv-search', '2')">
+                            Search by events
+                        </label>
+                    </div>
+                    
+                    <div class="form-check">
+                        <label class="form-check-label" for="searchByAuthor">
+                            <input class="form-check-input" type="radio" name="adv-search" id="searchByAuthor" value="3" onclick="localStorage.setItem('adv-search', '3')">
+                            Search by author
+                        </label>
+                    </div>
+                    
+                    {% if loggedIn %}
+                    <br>
+                    
+                    <p>Order By</p>
+                    <div class="form-check">
+                        <label class="form-check-label" for="searchOrdA">
+                            <input class="form-check-input" type="radio" name="search-ord" id="searchOrdA" value="0" onclick="localStorage.setItem('search-ord', '0')">
+                            Ascending
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <label class="form-check-label" for="searchOrdD">
+                            <input class="form-check-input" type="radio" name="search-ord" id="searchOrdD" value="1" onclick="localStorage.setItem('search-ord', '1')">
+                            Descending
+                        </label>
+                    </div>
+                    
+                    {% else %}
+                        <br>
+                        <div class="alert alert-primary" role="alert">
+                            Login to unlock more!
+                        </div>
+                    {% endif %}
                 </form>
             </div>
         </div>
@@ -93,3 +135,24 @@
 
 <div style='height: 70px;'>
 </div>
+
+<script>
+window.onload = () => {
+    let advOpt = localStorage.getItem('adv-search')
+    if (advOpt === '2') {
+        document.getElementById('searchByEvent').setAttribute('checked', true)
+    } else if (advOpt == '3') {
+        document.getElementById('searchByAuthor').setAttribute('checked', true)
+    } else {
+        document.getElementById('searchByMatching').setAttribute('checked', true)
+    }
+    
+    let srchOrd = localStorage.getItem('search-ord')
+    if (!srchOrd) srchOrd = '1'
+    if (srchOrd === '0') {
+        document.getElementById('searchOrdA').setAttribute('checked', true)
+    } else if (srchOrd === '1') {
+        document.getElementById('searchOrdD').setAttribute('checked', true)
+    }
+}
+</script>

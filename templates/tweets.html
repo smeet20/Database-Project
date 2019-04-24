@@ -28,6 +28,10 @@
     display: none;
 }
 
+strong {
+    font-weight: normal;
+}
+
 </style>
 
 <div id="tweets-container" class="container ml-auto mr-auto mt-4">
@@ -44,6 +48,12 @@ function updateTweets(tweets) {
                 <div class="card-body">
                     <div class="card-text">
                         ${t.text.replace(/\s\s+/g, ' ')}
+                    </div>
+                    <div class="card-footer">
+                        <i class="fa fa-heart" style='color: red'></i> ${t.likes} &nbsp; &nbsp;
+                        <i class="fa fa-retweet" style='color: green'></i> ${t.retweets} &nbsp; &nbsp;
+                        <i class="fa fa-reply" style='color: blue'></i> ${t.replies}
+                        <span class='float-right'>${moment(t.time).fromNow()}</span>
                     </div>
                 </div>
             </div>
@@ -71,7 +81,20 @@ function fetchTweets(how) {
     
     let query = getQueryString('search')
     if (query) {
-        xhr.open('GET', `/api/search?q=${query}&cnt=${cnt}`, true);
+        let advOpt = document.querySelector('input[name = "adv-search"]:checked')
+        if (advOpt) {
+            advOpt = advOpt.value
+        } else {
+            advOpt = 0
+        }
+        
+        let ord = document.querySelector('input[name = "search-ord"]:checked')
+        if (ord) {
+            ord = ord.value
+        } else {
+            ord = 2
+        }
+        xhr.open('GET', `/api/search?q=${query}&cnt=${cnt}&adv=${advOpt}&ord=${ord}`, true);
     } else {
         xhr.open('POST', `/api/${how}-tweets`, true);
     }
