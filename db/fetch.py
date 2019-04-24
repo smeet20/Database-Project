@@ -23,6 +23,24 @@ def scrape(query):
     for tweet in soup.select('li[data-item-type="tweet"]'):
         meta_data = tweet.div
         user_id = meta_data['data-user-id']
+        location = 'None'
+
+        # trying to get the location
+        try:
+            temp = list(meta_data['data-permalink-path'])
+            ix = temp[1:].index('/')
+            user_href = temp[:ix+1]
+            url = 'https://www.twitter.com'+''.join(user_href)
+            req_user = requests.get(url, headers={'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.128 Safari/537.36'})
+            html_doc_user = req_user.text
+            soup_user = BeautifulSoup(html_doc_user, 'html.parser')
+            tt = soup_user.select('div[class="ProfileHeaderCard-location"]')
+            location = tt[0].a.string
+            if ',' in location:
+                ix2 = location.index(',')
+                location = location[ix2 + 1, :]
+        except:
+            pass # let go.
         user_name = meta_data['data-name']
         tweet_id = meta_data['data-tweet-id']
         parent_id = meta_data['data-conversation-id']
@@ -43,7 +61,8 @@ def scrape(query):
         cur = Conn.cursor()
         try:
             cur.execute('insert into author (id, name) values (?, ?)', (user_id, user_name))
-            cur.execute('insert into tweets (id, parent_id, time, likes, replies, retweets, text) values (?, ?, ?, ?, ?, ?, ?)', (tweet_id, parent_id, timestamp, likes, replies, retweets, text))
+            cur.execute('insert into tweets (id, parent_id, time, likes, replies, retweets, text, location) values (?, ?, ?, ?, ?, ?, ?, ?)',
+            (tweet_id, parent_id, timestamp, likes, replies, retweets, text, location))
             Conn.commit()
         except sqlite3.Error as e:
             print(e)
